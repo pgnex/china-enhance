@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Linkers">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Hooking">
+      <UniqueIdentifier>{6e061a4d-2542-41b2-9bb4-0d6d1c5154db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Management">
+      <UniqueIdentifier>{6525762e-b617-47b2-8795-9b170e64be6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Imgui">
+      <UniqueIdentifier>{e7290a14-d4e3-45d9-80c6-1c633ad74484}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Imgui\dx11">
+      <UniqueIdentifier>{91724bca-4402-421c-ab36-dad86792da6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Hooking\DrawScene">
+      <UniqueIdentifier>{7a1a567a-9069-4f4c-8638-dfcf9fae61bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Hooking\PUBG">
+      <UniqueIdentifier>{e2eaff64-e99d-4077-903f-8cc093966829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Hooking\RUST">
+      <UniqueIdentifier>{622ecd69-116f-4b58-a039-6575d51301c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Hooking\RAINBOW">
+      <UniqueIdentifier>{ec4d40aa-cc06-4d43-b76b-4b2fbb1b31cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Hooking\FORTNITE">
+      <UniqueIdentifier>{ec1569c2-fad3-4ee2-9378-b894d726fe1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Auth">
+      <UniqueIdentifier>{c77b380f-54da-4a01-b91c-8c0a2ff3ba85}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DLLMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hooks.cpp">
+      <Filter>Source Files\Hooking</Filter>
+    </ClCompile>
+    <ClCompile Include="Management.cpp">
+      <Filter>Source Files\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>Source Files\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_custom.cpp">
+      <Filter>Source Files\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>Source Files\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\dx11\imgui_impl_dx11.cpp">
+      <Filter>Source Files\Imgui\dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawScene.cpp">
+      <Filter>Source Files\Hooking\DrawScene</Filter>
+    </ClCompile>
+    <ClCompile Include="PUBG.cpp">
+      <Filter>Source Files\Hooking\PUBG</Filter>
+    </ClCompile>
+    <ClCompile Include="RUST.cpp">
+      <Filter>Source Files\Hooking\RUST</Filter>
+    </ClCompile>
+    <ClCompile Include="Rainbow.cpp">
+      <Filter>Source Files\Hooking\RAINBOW</Filter>
+    </ClCompile>
+    <ClCompile Include="Fortnite.cpp">
+      <Filter>Source Files\Hooking\FORTNITE</Filter>
+    </ClCompile>
+    <ClCompile Include="Auth.cpp">
+      <Filter>Source Files\Auth</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Link.h">
+      <Filter>Linkers</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes.h">
+      <Filter>Linkers</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks.h">
+      <Filter>Source Files\Hooking</Filter>
+    </ClInclude>
+    <ClInclude Include="Management.h">
+      <Filter>Source Files\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>Source Files\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>Source Files\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_custom.h">
+      <Filter>Source Files\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>Source Files\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_rect_pack.h">
+      <Filter>Source Files\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_textedit.h">
+      <Filter>Source Files\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_truetype.h">
+      <Filter>Source Files\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\dx11\imgui_impl_dx11.h">
+      <Filter>Source Files\Imgui\dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawScene.h">
+      <Filter>Source Files\Hooking\DrawScene</Filter>
+    </ClInclude>
+    <ClInclude Include="PUBG.h">
+      <Filter>Source Files\Hooking\PUBG</Filter>
+    </ClInclude>
+    <ClInclude Include="RUST.h">
+      <Filter>Source Files\Hooking\RUST</Filter>
+    </ClInclude>
+    <ClInclude Include="Rainbow.h">
+      <Filter>Source Files\Hooking\RAINBOW</Filter>
+    </ClInclude>
+    <ClInclude Include="detours.h">
+      <Filter>Source Files\Hooking</Filter>
+    </ClInclude>
+    <ClInclude Include="Fortnite.h">
+      <Filter>Source Files\Hooking\FORTNITE</Filter>
+    </ClInclude>
+    <ClInclude Include="Auth.h">
+      <Filter>Source Files\Auth</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\..\..\..\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x64\d3dx10.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="detours.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\programmingbinarys\curl-master\builds\libcurl-vc14-x64-release-static-ipv6-sspi-winssl\lib\libcurl_a.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="Polyhook\Capstone\msvc_vs2017\x64\Release\capstone.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+  </ItemGroup>
+</Project>
