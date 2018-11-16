@@ -5,7 +5,7 @@
 
 namespace Fortnite
 {
-	constexpr uintptr_t UWorldOffset = 0x577B240;
+	constexpr uintptr_t UWorldOffset = 0x58227A0;
 
 	/*
 	class FTextData {
@@ -68,6 +68,76 @@ namespace Fortnite
 		int32_t Max;
 	};
 
+	class Root1
+	{
+	public:
+		char pad_0000[128]; //0x0000
+		float N00000A74; //0x0080
+		int32_t N00000AA0; //0x0084
+		char pad_0088[24]; //0x0088
+		D3DXVECTOR3 Positon1; //0x00A0
+		float N00000A96; //0x00AC
+		float N00000A79; //0x00B0
+		char pad_00B4[4]; //0x00B4
+		float N00000A7A; //0x00B8
+		char pad_00BC[12]; //0x00BC
+		float N00000A7C; //0x00C8
+		char pad_00CC[188]; //0x00CC
+		int32_t N00000A94; //0x0188
+		char pad_018C[324]; //0x018C
+	}; //Size: 0x02D0
+
+	class Root2
+	{
+	public:
+		char pad_0000[328]; //0x0000
+		D3DXVECTOR3 Position2; //0x0148
+		float N00000B18; //0x0154
+		float N00000AF8; //0x0158
+		float N00000B1B; //0x015C
+		float N00000AF9; //0x0160
+		float N00000B1E; //0x0164
+		float N00000AFA; //0x0168
+		float N00000B21; //0x016C
+		float N00000AFB; //0x0170
+		float N00000B24; //0x0174
+		int32_t N00000B28; //0x0178
+		float N00000AFC; //0x017C
+		int32_t N00000B2B; //0x0180
+		float N00000AFD; //0x0184
+		float N00000B2E; //0x0188
+		float N00000AFE; //0x018C
+		char pad_0190[4]; //0x0190
+		int32_t N00000AFF; //0x0194
+		int32_t N00000B33; //0x0198
+		int32_t N00000B00; //0x019C
+		float N00000B36; //0x01A0
+		float N00000B01; //0x01A4
+		float N00000B39; //0x01A8
+		float N00000B02; //0x01AC
+		float N00000B3C; //0x01B0
+		int32_t N00000B3E; //0x01B4
+		float N00000B6E; //0x01B8
+		float N00000B3F; //0x01BC
+		float N00000B71; //0x01C0
+		char pad_01C4[16]; //0x01C4
+		int32_t N00000B05; //0x01D4
+		int32_t N00000B74; //0x01D8
+		int32_t N00000B06; //0x01DC
+		float N00000B77; //0x01E0
+		float N00000B07; //0x01E4
+		char pad_01E8[4]; //0x01E8
+		float N00000B08; //0x01EC
+		char pad_01F0[20]; //0x01F0
+		float N00000B0B; //0x0204
+		char pad_0208[4]; //0x0208
+		float N00000B0C; //0x020C
+		char pad_0210[284]; //0x0210
+		float N00000B64; //0x032C
+		char pad_0330[52]; //0x0330
+}; //Size: 0x0364
+
+#if 0
 	class RootComponent
 	{
 	public:
@@ -91,16 +161,16 @@ namespace Fortnite
 		float N00000413; //0x01DC
 		char pad_01E0[116]; //0x01E0
 	}; //Size: 0x0254
-
+#endif
 	class Actor
 	{
 	public:
 		char pad_0000[24]; //0x0000
 		int32_t ActorID; //0x0018
-		char pad_001C[236]; //0x001C
-		class N00000054* N0000002C; //0x0108
-		char pad_0110[72]; //0x0110
-		RootComponent* RootComponent; //0x0158
+		char pad_001C[292]; //0x001C
+		class Root1* Root1; //0x0140
+		char pad_0148[16]; //0x0148
+		class Root2* Root2; //0x0158
 	};
 
 	class CameraManager

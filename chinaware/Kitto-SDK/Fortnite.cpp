@@ -247,12 +247,12 @@ namespace Fortnite
 	{
 		auto UWorld = GetUWorld();
 		auto Local = UWorld->OwningInstance->localPlayers[0];
-		std::cout << Local << std::endl;
+		std::cout << "Local: " << Local << std::endl;
 	}
 
 	void PrintUWorldPointer()
 	{
-		std::cout << GetUWorld() << std::endl;
+		std::cout << "Uworld: " << GetUWorld() << std::endl;
 	}
 
 	void DumpPlayerNames()
@@ -263,6 +263,9 @@ namespace Fortnite
 			for (int i = 0; i < Actors.Num(); i++) {
 				auto Actor = Actors[i];
 				if (Actor) {
+					auto actorIdS = std::to_string(Actor->ActorID);
+
+					if (actorIdS.at(0) == '2')
 					std::cout << GetActorName(Actor) << std::endl;
 				}
 			}
@@ -348,7 +351,11 @@ namespace Fortnite
 			for (int i = 0; i < Actors.Num(); i++) {
 				auto Actor = Actors[i];
 				if (Actor) {
-					std::cout << Actor << std::endl;
+
+					auto actorIdS = std::to_string(Actor->ActorID);
+
+					if (actorIdS.at(0) == '2')				
+					std::cout << "Actor Id: " << actorIdS << " at: " << Actor << std::endl;
 				}
 			}
 
@@ -412,11 +419,11 @@ namespace Fortnite
 									if (Actor) {
 
 										// Run esp code.
-										auto Root = Actor->RootComponent;
+										auto Root = Actor->Root2;
 
 										if (Root) {
 
-											auto pos = Root->Position;
+											auto pos = Root->Position2;
 
 											auto deltapos = pos - Local->LocalPlayerPosition;
 											
@@ -446,11 +453,11 @@ namespace Fortnite
 									if (Actor) {
 
 										// Run esp code.
-										auto Root = Actor->RootComponent;
+										auto Root = Actor->Root2;
 
 										if (Root) {
 
-											auto pos = Root->Position;
+											auto pos = Root->Position2;
 
 											pos.z -= 150.f;
 
