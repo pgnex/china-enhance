@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 class Utilities {
 
-    public static string game_path = @"A:\Fortnite\Fortnite\Engine\Binaries\ThirdParty\PhysX3\Win64\VS2015\";
+    public static string game_path = @"C:\Program Files\Epic Games\Fortnite\Engine\Binaries\ThirdParty\PhysX3\Win64\VS2015\";
 
     private static string cpuID() {
         string cpuInfo = "";
