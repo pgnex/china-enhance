@@ -176,14 +176,13 @@ namespace Fortnite
 	class CameraManager
 	{
 	public:
-		char pad_0000[3632]; //0x0000
-		D3DXVECTOR3 CameraPosition; //0x0E30
-		D3DXVECTOR3 Rotation; //0x0E3C
-		float FOV; //0x0E48
-		float FOV2; //0x0E4C
-		float SomeFloat; //0x0E50
-		char pad_0E54[572]; //0x0E54
-	}; //Size: 0x1E60
+		char pad_0000[5344]; //0x0000
+		D3DXVECTOR3 CameraPosition; //0x14E0
+		D3DXVECTOR3 Rotation; //0x14EC
+		float FOV; //0x14F8
+		char pad_14FC[3828]; //0x14FC
+	}; //Size: 0x23F0
+
 
 	class PlayerController
 	{
