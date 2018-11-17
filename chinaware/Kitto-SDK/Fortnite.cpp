@@ -25,10 +25,8 @@ namespace Fortnite
 
 	bool DataCompare(const BYTE* OpCodes, const BYTE* Mask, const char* StrMask)
 	{
-		//solange bis String zuende 
 		while (*StrMask)
 		{
-			//wenn Byte ungleich --> false 
 			if (*StrMask == 'x' && *OpCodes != *Mask)
 				return false;
 
@@ -37,7 +35,7 @@ namespace Fortnite
 			++Mask;
 		}
 
-		return true;  //wenn alle Bytes gleich 
+		return true; 
 	}
 
 	uintptr_t FindPattern(uintptr_t StartAddress, size_t CodeLen, BYTE* Mask, const  char* StrMask, unsigned short ignore)
