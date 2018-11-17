@@ -225,13 +225,13 @@ namespace Fortnite
 
 	CUWorld* GetUWorld()
 	{
-#if 0
+#if 1
 		static bool bHasInit = false;
 
-		static CUWorld* ppUWorld = nullptr;
+		static CUWorld** ppUWorld = nullptr;
 
 		if (!bHasInit) {
-			ppUWorld = (CUWorld*)FindPattern(GManagement.m_codeStart, GManagement.m_codeSize, (BYTE*)"\x48\x8B\x05\x00\x00\x00\x00\x48\x85\xC0\x0F\x84\x00\x00\x00\x00\x48\x8B\x88\x00\x00\x00\x00\x48\x85\xC9", "xxx????xxxxx????xxx????xxx", 3);
+			ppUWorld = (CUWorld**)FindPatternRel(GManagement.m_codeStart, GManagement.m_codeSize, (BYTE*)"\x48\x8B\x05\x00\x00\x00\x00\x48\x85\xC0\x0F\x84\x00\x00\x00\x00\x48\x8B\x88\x00\x00\x00\x00\x48\x85\xC9", "xxx????xxxxx????xxx????xxx", 3);
 			bHasInit = true;
 		}
 		if (ppUWorld) {

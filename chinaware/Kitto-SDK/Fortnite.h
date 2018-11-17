@@ -5,7 +5,7 @@
 
 namespace Fortnite
 {
-	constexpr uintptr_t UWorldOffset = 0x5822790;
+	constexpr uintptr_t UWorldOffset = 0x58226E0;
 
 	/*
 	class FTextData {

@@ -431,7 +431,7 @@ namespace Hooks {
 
 		printf("dxgi.dll found\n");
 
-		// getCodeInfo((DWORD_PTR)GetModuleHandleA(NULL), &GManagement.m_codeStart, &GManagement.m_codeSize);
+		getCodeInfo((DWORD_PTR)GetModuleHandleA(NULL), &GManagement.m_codeStart, &GManagement.m_codeSize);
 
 #if DEBUGGING
 		AllocConsole();
@@ -442,7 +442,7 @@ namespace Hooks {
 #endif
 
 		// Auth
-#if 1
+#if 0
 		GManagement.Window_name = AUTHENTICATION::GetServerVariable("dog");
 
 		if (!strstr(GManagement.Window_name.c_str(), "Fortnite"))
