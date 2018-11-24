@@ -60,8 +60,9 @@ public:
 	bool should_load_actor = false;
 	bool Aimbot_DrawFov = false;
 	bool Aimbot_DrawSeeker = false;
-
 	float ESPFOV = 90.f;
+	bool debug_esp = false;
+
 };
 class CManagement
 {

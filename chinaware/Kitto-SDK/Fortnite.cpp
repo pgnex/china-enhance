@@ -409,6 +409,7 @@ namespace Fortnite
 								float lowestDst = 999099999.f;
 
 								int32_t best_actorid = 0x0; //0x0018
+								Root2* best_root = nullptr;
 
 								for (int i = 0; i < Actors.Num(); i++) {
 
@@ -435,14 +436,130 @@ namespace Fortnite
 											{
 												best_actorid = Actor->ActorID;
 
+												best_root = Root;
+
 												lowestDst = deltadistance2d;
 											}
 										}
 									}
 								}
 
-								if (GManagement.m_Configs.debugInfo)
+								if (GManagement.m_Configs.debugInfo) {
+
 									ImGui::RenderText(ImVec2(7, 80), std::to_string(best_actorid).c_str());
+									auto padding = 95;
+									ImGui::RenderText(ImVec2(7, padding), ("1: " + std::to_string(best_root->N00000B18)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("2: " + std::to_string(best_root->N00000AF8)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("3: " + std::to_string(best_root->N00000B1B)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("4: " + std::to_string(best_root->N00000AF9)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("5: " + std::to_string(best_root->N00000B1E)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("6: " + std::to_string(best_root->N00000AFA)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("7: " + std::to_string(best_root->N00000B21)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("8: " + std::to_string(best_root->N00000AFB)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("9: " + std::to_string(best_root->N00000B24)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("10: " + std::to_string(best_root->N00000B28)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("11: " + std::to_string(best_root->N00000AFC)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("12: " + std::to_string(best_root->N00000B2B)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("13: " + std::to_string(best_root->N00000AFD)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("14: " + std::to_string(best_root->N00000B2E)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("15: " + std::to_string(best_root->N00000AFE)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("16: " + std::to_string(best_root->N00000AFF)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("17: " + std::to_string(best_root->N00000B33)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("18: " + std::to_string(best_root->N00000B00)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("19: " + std::to_string(best_root->N00000B36)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("20: " + std::to_string(best_root->N00000B01)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("21: " + std::to_string(best_root->N00000B39)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("22: " + std::to_string(best_root->N00000B02)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("23: " + std::to_string(best_root->N00000B3C)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("24: " + std::to_string(best_root->N00000B3E)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("25: " + std::to_string(best_root->N00000B6E)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("26: " + std::to_string(best_root->N00000B3F)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("27: " + std::to_string(best_root->N00000B71)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("28: " + std::to_string(best_root->N00000B05)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("29: " + std::to_string(best_root->N00000B74)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("30: " + std::to_string(best_root->N00000B06)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("31: " + std::to_string(best_root->N00000B77)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("32: " + std::to_string(best_root->N00000B07)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("33: " + std::to_string(best_root->N00000B08)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("34: " + std::to_string(best_root->N00000B0B)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("35: " + std::to_string(best_root->N00000B0C)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("36: " + std::to_string(best_root->N00000B0C)).c_str());
+									padding += 15;
+
+									ImGui::RenderText(ImVec2(7, padding), ("37: " + std::to_string(best_root->N00000B64)).c_str());
+									padding += 15;
+
+								}
 
 								for (int i = 0; i < Actors.Num(); i++) {
 
@@ -511,15 +628,135 @@ namespace Fortnite
 														best_fov = CurFov;
 													}
 
+													int padding = 0;
 													if (GManagement.m_Configs.DistanceESP) {
 														auto delta = pos - Local->LocalPlayerPosition;
 														auto dst = Length2D(delta);
 														std::string distances = "[" + std::to_string((int)dst / 100) + "m]";
 														imgui_custom::CreateOutlinedText(GManagement.Verdana, distances.c_str(), ImVec2(ScreenPos.x, ScreenPos.y + 5.f), 12.f, hex_Dstcol, 1);
+														padding += 15;
 													}
 
-													if (GManagement.m_Configs.NameESP)
-														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y), "player");
+													if (GManagement.m_Configs.debug_esp) {
+														
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("1: " + std::to_string(Root->N00000B18)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("2: " + std::to_string(Root->N00000AF8)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("3: " + std::to_string(Root->N00000B1B)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("4: " + std::to_string(Root->N00000AF9)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("5: " + std::to_string(Root->N00000B1E)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("6: " + std::to_string(Root->N00000AFA)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("7: " + std::to_string(Root->N00000B21)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("8: " + std::to_string(Root->N00000AFB)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("9: " + std::to_string(Root->N00000B24)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("10: " + std::to_string(Root->N00000B28)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("11: " + std::to_string(Root->N00000AFC)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("12: " + std::to_string(Root->N00000B2B)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("13: " + std::to_string(Root->N00000AFD)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("14: " + std::to_string(Root->N00000B2E)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("15: " + std::to_string(Root->N00000AFE)).c_str());
+														padding += 15;
+										
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("16: " + std::to_string(Root->N00000AFF)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("17: " + std::to_string(Root->N00000B33)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("18: " + std::to_string(Root->N00000B00)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("19: " + std::to_string(Root->N00000B36)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("20: " + std::to_string(Root->N00000B01)).c_str());
+														padding += 15;
+												
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("21: " + std::to_string(Root->N00000B39)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("22: " + std::to_string(Root->N00000B02)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("23: " + std::to_string(Root->N00000B3C)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("24: " + std::to_string(Root->N00000B3E)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("25: " + std::to_string(Root->N00000B6E)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("26: " + std::to_string(Root->N00000B3F)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("27: " + std::to_string(Root->N00000B71)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("28: " + std::to_string(Root->N00000B05)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("29: " + std::to_string(Root->N00000B74)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("30: " + std::to_string(Root->N00000B06)).c_str());
+														padding += 15;
+													
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("31: " + std::to_string(Root->N00000B77)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("32: " + std::to_string(Root->N00000B07)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("33: " + std::to_string(Root->N00000B08)).c_str());
+														padding += 15;
+											
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("34: " + std::to_string(Root->N00000B0B)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("35: " + std::to_string(Root->N00000B0C)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("36: " + std::to_string(Root->N00000B0C)).c_str());
+														padding += 15;
+
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("37: " + std::to_string(Root->N00000B64)).c_str());
+														padding += 15;
+
+													}
+
+													if (GManagement.m_Configs.NameESP) {
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), "player");
+														padding += 15;
+													}
+
 
 													if (GManagement.m_Configs.SnapLines) {
 														imgui_custom::DrawLine(ImVec2(ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y), ImVec2(ScreenPos.x, ScreenPos.y), hex_Snapcol, 1.f);

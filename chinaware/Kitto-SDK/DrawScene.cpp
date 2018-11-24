@@ -255,6 +255,7 @@ namespace DrawScene
 						ImGui::Checkbox("Box Esp", &GManagement.m_Configs.BoundingBox, 0);
 						imgui_custom::custom_color_inline(GManagement.m_Configs.Box_Color, "Box Color");
 
+						ImGui::Checkbox("Debug Info", &GManagement.m_Configs.debug_esp, 0);
 
 					//	ImGui::InputInt("Actor ID", &GManagement.m_Configs.ActorFilter);
 
