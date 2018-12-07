@@ -5,7 +5,7 @@
 
 namespace Fortnite
 {
-	constexpr uintptr_t UWorldOffset = 0x58226E0;
+	constexpr uintptr_t UWorldOffset = 0x593DE10;
 
 	/*
 	class FTextData {
@@ -188,7 +188,7 @@ namespace Fortnite
 	class PlayerController
 	{
 	public:
-		char pad_0000[968]; //0x0000
+		char pad_0000[0x3D0]; //0x0000
 		CameraManager* CameraManager; //0x03C8
 	}; //Size: 0x0578
 
@@ -254,6 +254,7 @@ namespace Fortnite
 	void PrintLocal();
 	void DumpPlayerAddresses();
 	void DumpPlayerNames();
+	void uworld_offset_calc();
 }
 
 #endif

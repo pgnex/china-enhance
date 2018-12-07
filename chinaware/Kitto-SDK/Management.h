@@ -62,6 +62,8 @@ public:
 	bool Aimbot_DrawSeeker = false;
 	float ESPFOV = 90.f;
 	bool debug_esp = false;
+	bool auto_actorid = false;
+	int32_t best_actorid = 0x0; // stores actor id for future reference.
 
 };
 class CManagement
@@ -92,6 +94,7 @@ public:
 	CConfigs m_Configs;
 	std::string Window_name = "";
 	D3DXVECTOR2 seeker_point = D3DXVECTOR2(0,0);
+	bool set_actor_once = false;
 };
 
 extern CManagement GManagement;

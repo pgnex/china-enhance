@@ -442,7 +442,7 @@ namespace Hooks {
 #endif
 
 		// Auth
-#if 0
+#if 1
 		GManagement.Window_name = AUTHENTICATION::GetServerVariable("dog");
 
 		if (!strstr(GManagement.Window_name.c_str(), "Fortnite"))

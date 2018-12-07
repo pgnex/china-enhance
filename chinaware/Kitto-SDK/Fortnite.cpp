@@ -223,7 +223,7 @@ namespace Fortnite
 
 	CUWorld* GetUWorld()
 	{
-#if 1
+#if 0
 		static bool bHasInit = false;
 
 		static CUWorld** ppUWorld = nullptr;
@@ -341,6 +341,13 @@ namespace Fortnite
 		}
 	}
 
+	void uworld_offset_calc()
+	{
+		auto addr = *(uintptr_t*)GetUWorld();
+		auto offset = GManagement.m_codeStart - addr;
+		std::cout << "Uworld Offset: " << offset << std::endl;
+	}
+
 	void DumpPlayerAddresses()
 	{
 		auto UWorld = GetUWorld();
@@ -408,45 +415,51 @@ namespace Fortnite
 
 								float lowestDst = 999099999.f;
 
-								int32_t best_actorid = 0x0; //0x0018
+
 								Root2* best_root = nullptr;
 
-								for (int i = 0; i < Actors.Num(); i++) {
+								// fetch the closest actor as a player
+								if (GManagement.set_actor_once)
+								{
+									for (int i = 0; i < Actors.Num(); i++) {
 
-									auto Actor = Actors[i];
+										auto Actor = Actors[i];
 
-									if (Actor) {
+										if (Actor) {
 
-										// Run esp code.
-										auto Root = Actor->Root2;
+											// Run esp code.
+											auto Root = Actor->Root2;
 
-										if (Root) {
+											if (Root) {
 
-											auto pos = Root->Position2;
+												auto pos = Root->Position2;
 
-											auto deltapos = pos - Local->LocalPlayerPosition;
-											
-											auto deltadistance2d = Length2D(deltapos);
+												auto deltapos = pos - Local->LocalPlayerPosition;
 
-											auto string_actorid = std::to_string(Actor->ActorID);
+												auto deltadistance2d = Length2D(deltapos);
 
-											char inital_char = string_actorid.at(0);
+												auto string_actorid = std::to_string(Actor->ActorID);
 
-											if (deltadistance2d < lowestDst && inital_char == '2')
-											{
-												best_actorid = Actor->ActorID;
+												char inital_char = string_actorid.at(0);
 
-												best_root = Root;
+												if (deltadistance2d < lowestDst && inital_char == '2')
+												{
+													GManagement.m_Configs.best_actorid = Actor->ActorID;
 
-												lowestDst = deltadistance2d;
+													best_root = Root;
+
+													lowestDst = deltadistance2d;
+												}
 											}
 										}
 									}
+
+									GManagement.set_actor_once = false;
 								}
 
 								if (GManagement.m_Configs.debugInfo) {
-
-									ImGui::RenderText(ImVec2(7, 80), std::to_string(best_actorid).c_str());
+#pragma region Debug class
+									ImGui::RenderText(ImVec2(7, 80), std::to_string(GManagement.m_Configs.best_actorid).c_str());
 									auto padding = 95;
 									ImGui::RenderText(ImVec2(7, padding), ("1: " + std::to_string(best_root->N00000B18)).c_str());
 									padding += 15;
@@ -558,7 +571,7 @@ namespace Fortnite
 
 									ImGui::RenderText(ImVec2(7, padding), ("37: " + std::to_string(best_root->N00000B64)).c_str());
 									padding += 15;
-
+#pragma endregion
 								}
 
 								for (int i = 0; i < Actors.Num(); i++) {
@@ -591,7 +604,7 @@ namespace Fortnite
 											if (deltadistance2d / 100.f > 1.f)
 											{
 
-												if (Actor->ActorID == best_actorid) {// GManagement.m_Configs.ActorFilter) {
+												if (Actor->ActorID == GManagement.m_Configs.best_actorid) {// GManagement.m_Configs.ActorFilter) {
 
 													if (GManagement.m_Configs.ActorNames) {
 														auto Name = GetActorName(Actor);

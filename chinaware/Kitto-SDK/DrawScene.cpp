@@ -251,14 +251,25 @@ namespace DrawScene
 
 						ImGui::Checkbox("Distance", &GManagement.m_Configs.DistanceESP, 0);
 						imgui_custom::custom_color_inline(GManagement.m_Configs.DistanceColor, "Distance Color");
-			
+
 						ImGui::Checkbox("Box Esp", &GManagement.m_Configs.BoundingBox, 0);
 						imgui_custom::custom_color_inline(GManagement.m_Configs.Box_Color, "Box Color");
 
 						ImGui::Checkbox("Debug Info", &GManagement.m_Configs.debug_esp, 0);
 
-					//	ImGui::InputInt("Actor ID", &GManagement.m_Configs.ActorFilter);
+						ImGui::Checkbox("Auto Actor ID", &GManagement.m_Configs.auto_actorid, 0);
 
+						if (!GManagement.m_Configs.auto_actorid) {
+
+							if (ImGui::Button("Manual (Press Ingame)")) {
+									GManagement.set_actor_once = true;
+							}
+						}
+						else {
+							GManagement.set_actor_once = true;
+						}
+
+						//	ImGui::InputInt("Actor ID", &GManagement.m_Configs.ActorFilter);
 #if 0
 						if (ImGui::Button("Load Actor Filter"))
 						{
@@ -268,16 +279,16 @@ namespace DrawScene
 								file >> data;
 								file.close();
 								GManagement.m_Configs.ActorFilter = std::stoi(data);
-							}
+						}
 							catch (...) {
 
 							}
-						}
+					}
 #endif
 
 
 
-					}
+			}
 					ImGui::EndChild();
 #pragma endregion
 					ImGui::NextColumn();
@@ -318,6 +329,7 @@ namespace DrawScene
 
 						if (ImGui::Button("Print UWorld")) {
 							Fortnite::PrintUWorldPointer();
+							Fortnite::uworld_offset_calc();
 						}
 
 						if (ImGui::Button("Print Local")) {
@@ -331,7 +343,7 @@ namespace DrawScene
 						ImGui::Checkbox("Debug Info", &GManagement.m_Configs.debugInfo, 0);
 
 
-					
+
 
 						// ImGui::Checkbox("Display Actor Name", &GManagement.m_Configs.ActorNames, 0); 
 						//	ImGui::Text("World Fov Offset");
@@ -430,20 +442,20 @@ namespace DrawScene
 
 						if (ImGui::Button("Dump Bone List")) {
 							GManagement.m_Configs.DumpBoneList = true;
-						}
+					}
 
 						ImGui::Checkbox("Show Local Address", &GManagement.m_Configs.ShowLocalBase, 0);
 
-					}
+		}
 #endif
 #pragma endregion
 
-			}
-			ImGui::End();
-#endif
-		}
-
 	}
+				ImGui::End();
+#endif
+}
+
+}
 
 
 
