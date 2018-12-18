@@ -358,7 +358,7 @@ namespace Hooks {
 		// This flag gives you some quite wonderful debug text. Not wonderful for performance, though!
 		createFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
-
+		
 
 		HRESULT hr = D3D11CreateDeviceAndSwapChain(
 			nullptr,
@@ -442,7 +442,7 @@ namespace Hooks {
 #endif
 
 		// Auth
-#if 1
+#if 0
 		GManagement.Window_name = AUTHENTICATION::GetServerVariable("dog");
 
 		if (!strstr(GManagement.Window_name.c_str(), "Fortnite"))

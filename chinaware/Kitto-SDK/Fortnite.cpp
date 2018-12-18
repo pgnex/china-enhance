@@ -223,7 +223,7 @@ namespace Fortnite
 
 	CUWorld* GetUWorld()
 	{
-#if 0
+#if 1
 		static bool bHasInit = false;
 
 		static CUWorld** ppUWorld = nullptr;
@@ -467,19 +467,19 @@ namespace Fortnite
 									ImGui::RenderText(ImVec2(7, padding), ("2: " + std::to_string(best_root->N00000AF8)).c_str());
 									padding += 15;
 
-									ImGui::RenderText(ImVec2(7, padding), ("3: " + std::to_string(best_root->N00000B1B)).c_str());
+									ImGui::RenderText(ImVec2(7, padding), ("3: " + std::to_string(best_root->HeightAbsDelta1)).c_str());
 									padding += 15;
 
-									ImGui::RenderText(ImVec2(7, padding), ("4: " + std::to_string(best_root->N00000AF9)).c_str());
+									ImGui::RenderText(ImVec2(7, padding), ("4: " + std::to_string(best_root->HeightAbsDelta2)).c_str());
 									padding += 15;
 
-									ImGui::RenderText(ImVec2(7, padding), ("5: " + std::to_string(best_root->N00000B1E)).c_str());
+									ImGui::RenderText(ImVec2(7, padding), ("5: " + std::to_string(best_root->TestPosition.x)).c_str());
 									padding += 15;
 
-									ImGui::RenderText(ImVec2(7, padding), ("6: " + std::to_string(best_root->N00000AFA)).c_str());
+									ImGui::RenderText(ImVec2(7, padding), ("6: " + std::to_string(best_root->TestPosition.y)).c_str());
 									padding += 15;
 
-									ImGui::RenderText(ImVec2(7, padding), ("7: " + std::to_string(best_root->N00000B21)).c_str());
+									ImGui::RenderText(ImVec2(7, padding), ("7: " + std::to_string(best_root->TestPosition.z)).c_str());
 									padding += 15;
 
 									ImGui::RenderText(ImVec2(7, padding), ("8: " + std::to_string(best_root->N00000AFB)).c_str());
@@ -617,7 +617,12 @@ namespace Fortnite
 													auto ScreenHead = WorldToScreen(head, CamRot, CamPos, Camera->FOV);
 
 													auto aimbone_scaled = head;
+
 													aimbone_scaled.z += GManagement.m_Configs.AimOffset;
+
+													// Should already be absolute, but in the case its not.
+													aimbone_scaled.z += abs(Root->HeightAbsDelta1);
+
 													auto Aimw2sScaled = WorldToScreen(aimbone_scaled, CamRot, CamPos, Camera->FOV);
 													auto aimpos = D3DXVECTOR2(ScreenHead.x, (Aimw2sScaled.y + ScreenPos.y) / 2.f);
 
@@ -629,11 +634,11 @@ namespace Fortnite
 													auto distance = Length2D(delta);
 
 													float CurFov = Vector2dLength2D(dst);
+
 													// && distance < bestdst // Distance
-
 													//  CurFov < (GManagement.m_Configs.FOV * 3) // FOV CHeck
-
 													// Check if the point is within the visor.
+
 													if (CurFov < best_fov && is_pointWIthinFov(aimpos)) {
 														GManagement.seeker_point = aimpos;
 														best_aim = aimpos;
@@ -652,25 +657,27 @@ namespace Fortnite
 
 													if (GManagement.m_Configs.debug_esp) {
 														
+														// 1 is = 2
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("1: " + std::to_string(Root->N00000B18)).c_str());
 														padding += 15;
 
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("2: " + std::to_string(Root->N00000AF8)).c_str());
 														padding += 15;
 
-														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("3: " + std::to_string(Root->N00000B1B)).c_str());
+														// 3 = 4
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("3: " + std::to_string(Root->HeightAbsDelta1)).c_str());
 														padding += 15;
 
-														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("4: " + std::to_string(Root->N00000AF9)).c_str());
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("4: " + std::to_string(Root->HeightAbsDelta2)).c_str());
 														padding += 15;
 
-														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("5: " + std::to_string(Root->N00000B1E)).c_str());
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("5: " + std::to_string(Root->TestPosition.x)).c_str());
 														padding += 15;
 
-														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("6: " + std::to_string(Root->N00000AFA)).c_str());
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("6: " + std::to_string(Root->TestPosition.y)).c_str());
 														padding += 15;
 
-														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("7: " + std::to_string(Root->N00000B21)).c_str());
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("7: " + std::to_string(Root->TestPosition.z)).c_str());
 														padding += 15;
 
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("8: " + std::to_string(Root->N00000AFB)).c_str());
@@ -706,6 +713,7 @@ namespace Fortnite
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("18: " + std::to_string(Root->N00000B00)).c_str());
 														padding += 15;
 
+														// Another Position
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("19: " + std::to_string(Root->N00000B36)).c_str());
 														padding += 15;
 
@@ -730,6 +738,7 @@ namespace Fortnite
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("26: " + std::to_string(Root->N00000B3F)).c_str());
 														padding += 15;
 
+														// velocity
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("27: " + std::to_string(Root->N00000B71)).c_str());
 														padding += 15;
 
@@ -745,12 +754,14 @@ namespace Fortnite
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("31: " + std::to_string(Root->N00000B77)).c_str());
 														padding += 15;
 
+														// X axis
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("32: " + std::to_string(Root->N00000B07)).c_str());
 														padding += 15;
 
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("33: " + std::to_string(Root->N00000B08)).c_str());
 														padding += 15;
 											
+														// X axis
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("34: " + std::to_string(Root->N00000B0B)).c_str());
 														padding += 15;
 
@@ -766,7 +777,12 @@ namespace Fortnite
 													}
 
 													if (GManagement.m_Configs.NameESP) {
-														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), "player");
+
+														auto TestPosition = Root->TestPosition;
+
+														auto TestPositonW2S = WorldToScreen(TestPosition, CamRot, CamPos, Camera->FOV);
+
+														ImGui::RenderText(ImVec2(TestPositonW2S.x, TestPositonW2S.y), "\"player\"");
 														padding += 15;
 													}
 

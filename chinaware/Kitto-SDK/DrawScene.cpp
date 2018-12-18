@@ -261,13 +261,11 @@ namespace DrawScene
 
 						if (!GManagement.m_Configs.auto_actorid) {
 
-							if (ImGui::Button("Manual (Press Ingame)")) {
-									GManagement.set_actor_once = true;
+							if (ImGui::Button("Manual (Press Ingame)") && GManagement.m_bEnableMenu) {
+								GManagement.set_actor_once = true;
 							}
 						}
-						else {
-							GManagement.set_actor_once = true;
-						}
+
 
 						//	ImGui::InputInt("Actor ID", &GManagement.m_Configs.ActorFilter);
 #if 0
@@ -279,16 +277,16 @@ namespace DrawScene
 								file >> data;
 								file.close();
 								GManagement.m_Configs.ActorFilter = std::stoi(data);
-						}
+							}
 							catch (...) {
 
 							}
-					}
+						}
 #endif
 
 
 
-			}
+					}
 					ImGui::EndChild();
 #pragma endregion
 					ImGui::NextColumn();
@@ -442,20 +440,24 @@ namespace DrawScene
 
 						if (ImGui::Button("Dump Bone List")) {
 							GManagement.m_Configs.DumpBoneList = true;
-					}
+						}
 
 						ImGui::Checkbox("Show Local Address", &GManagement.m_Configs.ShowLocalBase, 0);
 
-		}
+					}
 #endif
 #pragma endregion
 
-	}
+					}
 				ImGui::End();
 #endif
-}
+			}
 
-}
+			if (GManagement.m_Configs.auto_actorid) {
+				GManagement.set_actor_once = true;
+			}
+
+		}
 
 
 
@@ -2022,7 +2024,7 @@ namespace DrawScene
 
 
 		}
-}
+	}
 
 
 

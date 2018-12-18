@@ -94,11 +94,17 @@ namespace Fortnite
 		D3DXVECTOR3 Position2; //0x0148
 		float N00000B18; //0x0154
 		float N00000AF8; //0x0158
-		float N00000B1B; //0x015C
-		float N00000AF9; //0x0160
-		float N00000B1E; //0x0164
-		float N00000AFA; //0x0168
-		float N00000B21; //0x016C
+		// Delta Heights
+		float HeightAbsDelta1; //0x015C
+		// Delta Heighjts
+		float HeightAbsDelta2; //0x0160
+
+		D3DXVECTOR3 TestPosition; //0x0148
+
+		// float N00000B1E; //0x0164
+		// float N00000AFA; //0x0168
+		// float N00000B21; //0x016C
+
 		float N00000AFB; //0x0170
 		float N00000B24; //0x0174
 		int32_t N00000B28; //0x0178
