@@ -5,31 +5,31 @@
 
 namespace Fortnite
 {
-	constexpr uintptr_t UWorldOffset = 0x593D010;
+	constexpr uintptr_t UWorldOffset = 0x5A223D0;
 
 	/*
 	class FTextData {
 	public:
 		char pad_0x0000[0x28];  //0x0000
-		wchar_t* Name;          //0x0028 
-		__int32 Length;         //0x0030 
-	 
+		wchar_t* Name;          //0x0028
+		__int32 Length;         //0x0030
+
 	};
-	 
+
 	struct FText {
 		FTextData* Data;
 		char UnknownData[0x10];
-	 
+
 		wchar_t* Get() const {
 			if (Data) {
 				return Data->Name;
 			}
-	 
+
 			return nullptr;
 		}
 	};
 	*/
-	
+
 	template<class T>
 	struct TArray
 	{
@@ -125,7 +125,7 @@ namespace Fortnite
 		int32_t N00000B3E; //0x01B4
 		float N00000B6E; //0x01B8
 		float N00000B3F; //0x01BC
-		float N00000B71; //0x01C0
+		float Velocity; //0x01C0
 		char pad_01C4[16]; //0x01C4
 		int32_t N00000B05; //0x01D4
 		int32_t N00000B74; //0x01D8
@@ -141,7 +141,7 @@ namespace Fortnite
 		char pad_0210[284]; //0x0210
 		float N00000B64; //0x032C
 		char pad_0330[52]; //0x0330
-}; //Size: 0x0364
+	}; //Size: 0x0364
 
 #if 0
 	class RootComponent
@@ -168,15 +168,94 @@ namespace Fortnite
 		char pad_01E0[116]; //0x01E0
 	}; //Size: 0x0254
 #endif
+
+	class WeaponInfo
+	{
+	public:
+		char pad_0000[40]; //0x0000
+		wchar_t* Namae; //0x0028
+	};
+
+	class WeaponData2
+	{
+	public:
+		char pad_0000[40]; //0x0000
+		wchar_t* DisplayName; //0x0028
+	};
+
+	class WeaponDef
+	{
+	public:
+		char pad_0000[128]; //0x0000
+		WeaponData2* WeaponData; //0x0080
+		char pad_0088[192]; //0x0088
+	}; //Size: 0x0148
+
+
+	class WeaponData
+	{
+	public:
+		char pad_0000[784]; //0x0000
+		WeaponInfo* WeaponInfo; //0x0310
+		char pad_0318[120]; //0x0318
+		WeaponDef* WeaponDef; //0x0390
+	}; //Size: 0x0848
+
+	struct FTextData
+	{
+		char __pad00[0x28];
+		wchar_t* Data;
+		int32_t Length;
+	};
+
+	struct FText
+	{
+		FTextData* Data;
+		unsigned char UnknownData[0x10];
+
+		wchar_t* Get()
+		{
+			if (!Data) return nullptr;
+
+			return Data->Data;
+		}
+	};
+
+	class PlayerState
+	{
+	public:
+		char pad_0000[128]; //0x0000
+		float ftextnameapparently; //0x0080
+		char pad_0084[3268]; //0x0084
+		int32_t Team; //0x0D48
+		char pad_0D4C[372]; //0x0D4C
+	}; //Size: 0x0EC0
+
+	class unknown {
+	};
+
 	class Actor
 	{
 	public:
 		char pad_0000[24]; //0x0000
 		int32_t ActorID; //0x0018
 		char pad_001C[292]; //0x001C
-		class Root1* Root1; //0x0140
+		Root1* Root1; //0x0140
 		char pad_0148[16]; //0x0148
-		class Root2* Root2; //0x0158
+		Root2* Root2; //0x0158
+		char pad_0160[488]; //0x0160
+		unknown* N00000A43; //0x0348
+		PlayerState* PlayerState; //0x0350
+		char pad_0358[56]; //0x0358
+		unknown* N00000A4C; //0x0390
+		unknown* N00000A4D; //0x0398
+		unknown* N00000A4E; //0x03A0
+		unknown* N00000A4F; //0x03A8
+		char pad_03B0[40]; //0x03B0
+		unknown* N00000A55; //0x03D8
+		char pad_03E0[1072]; //0x03E0
+		WeaponData* CurrentWeapon; //0x0810
+		char pad_0818[1064]; //0x0818
 	};
 
 	class CameraManager
@@ -254,7 +333,6 @@ namespace Fortnite
 	CUWorld* GetUWorld();
 	void Run_Hake();
 	void DrawFeet();
-	void DoAimbot();
 
 	void PrintUWorldPointer();
 	void PrintLocal();

@@ -35,7 +35,7 @@ namespace Fortnite
 			++Mask;
 		}
 
-		return true; 
+		return true;
 	}
 
 	uintptr_t FindPattern(uintptr_t StartAddress, size_t CodeLen, BYTE* Mask, const  char* StrMask, unsigned short ignore)
@@ -223,7 +223,7 @@ namespace Fortnite
 
 	CUWorld* GetUWorld()
 	{
-#if 1
+#if 0
 		static bool bHasInit = false;
 
 		static CUWorld** ppUWorld = nullptr;
@@ -264,7 +264,7 @@ namespace Fortnite
 					auto actorIdS = std::to_string(Actor->ActorID);
 
 					if (actorIdS.at(0) == '2')
-					std::cout << GetActorName(Actor) << std::endl;
+						std::cout << GetActorName(Actor) << std::endl;
 				}
 			}
 
@@ -359,8 +359,8 @@ namespace Fortnite
 
 					auto actorIdS = std::to_string(Actor->ActorID);
 
-					if (actorIdS.at(0) == '2')				
-					std::cout << "Actor Id: " << actorIdS << " at: " << Actor << std::endl;
+					if (actorIdS.at(0) == '2')
+						std::cout << "Actor Id: " << actorIdS << " at: " << Actor << std::endl;
 				}
 			}
 
@@ -385,7 +385,7 @@ namespace Fortnite
 		auto UWorld = Fortnite::GetUWorld();
 
 		DWORD hex_boxcol = D3DCOLOR_RGBA((int)(GManagement.m_Configs.Box_Color.x), ((int)GManagement.m_Configs.Box_Color.y), ((int)GManagement.m_Configs.Box_Color.z), 255);
-		DWORD hex_Dstcol = D3DCOLOR_RGBA((int)(GManagement.m_Configs.DistanceColor.x), ((int)GManagement.m_Configs.DistanceColor.y), ((int)GManagement.m_Configs.DistanceColor.z),255);
+		DWORD hex_Dstcol = D3DCOLOR_RGBA((int)(GManagement.m_Configs.DistanceColor.x), ((int)GManagement.m_Configs.DistanceColor.y), ((int)GManagement.m_Configs.DistanceColor.z), 255);
 		DWORD hex_Snapcol = D3DCOLOR_RGBA((int)(GManagement.m_Configs.snap_color.x), ((int)GManagement.m_Configs.snap_color.y), ((int)GManagement.m_Configs.snap_color.z), 255);
 
 		if (UWorld) {
@@ -415,11 +415,10 @@ namespace Fortnite
 
 								float lowestDst = 999099999.f;
 
-
 								Root2* best_root = nullptr;
-
+								int my_team = 0;
 								// fetch the closest actor as a player
-								if (GManagement.set_actor_once)
+								if (GManagement.set_actor_once || GManagement.m_Configs.ignore_team)
 								{
 									for (int i = 0; i < Actors.Num(); i++) {
 
@@ -444,9 +443,15 @@ namespace Fortnite
 
 												if (deltadistance2d < lowestDst && inital_char == '2')
 												{
-													GManagement.m_Configs.best_actorid = Actor->ActorID;
+													if (GManagement.set_actor_once) {
 
-													best_root = Root;
+														GManagement.m_Configs.best_actorid = Actor->ActorID;
+
+														best_root = Root;
+													}
+
+													// if (Actor->PlayerState)
+													//	my_team = Actor->PlayerState->Team;
 
 													lowestDst = deltadistance2d;
 												}
@@ -539,7 +544,7 @@ namespace Fortnite
 									ImGui::RenderText(ImVec2(7, padding), ("26: " + std::to_string(best_root->N00000B3F)).c_str());
 									padding += 15;
 
-									ImGui::RenderText(ImVec2(7, padding), ("27: " + std::to_string(best_root->N00000B71)).c_str());
+									ImGui::RenderText(ImVec2(7, padding), ("27: " + std::to_string(best_root->Velocity)).c_str());
 									padding += 15;
 
 									ImGui::RenderText(ImVec2(7, padding), ("28: " + std::to_string(best_root->N00000B05)).c_str());
@@ -606,6 +611,22 @@ namespace Fortnite
 
 												if (Actor->ActorID == GManagement.m_Configs.best_actorid) {// GManagement.m_Configs.ActorFilter) {
 
+
+													// Team check
+													// if (GManagement.m_Configs.ignore_team && Actor->PlayerState->Team == my_team) {
+													// 	continue;
+													// }
+
+													// check for dead players we also check for velocity incase they are actually gliding / freefalling.
+													if (GManagement.m_Configs.ignore_dead) {
+
+														auto weapon = Actor->CurrentWeapon;
+
+														if (!weapon) {
+															continue;
+														}										
+													}
+
 													if (GManagement.m_Configs.ActorNames) {
 														auto Name = GetActorName(Actor);
 														std::cout << "Value: " << Name << std::endl;
@@ -641,12 +662,20 @@ namespace Fortnite
 
 													if (CurFov < best_fov && is_pointWIthinFov(aimpos)) {
 														GManagement.seeker_point = aimpos;
-														best_aim = aimpos;
+
+														// if (Actor->PlayerState) {
+
+														// 	if (Actor->PlayerState->Team != my_team)
+																best_aim = aimpos;
+														// }
+
 														bestdst = distance;
 														best_fov = CurFov;
 													}
 
+
 													int padding = 0;
+
 													if (GManagement.m_Configs.DistanceESP) {
 														auto delta = pos - Local->LocalPlayerPosition;
 														auto dst = Length2D(delta);
@@ -655,8 +684,52 @@ namespace Fortnite
 														padding += 15;
 													}
 
+													if (GManagement.m_Configs.weapon_esp) {
+														auto weapon = Actor->CurrentWeapon;
+
+														if (weapon) {
+
+															auto def = weapon->WeaponDef;
+															if (def) {
+																auto data = def->WeaponData;
+																if (data) {
+																	auto name = data->DisplayName;
+
+																	if (name) {
+																		std::wstring ws(name);
+
+																		std::string ws_ns_weaponname(ws.begin(), ws.end());
+
+																		imgui_custom::CreateOutlinedText(GManagement.Verdana, ws_ns_weaponname.c_str(), ImVec2(ScreenPos.x, ScreenPos.y + padding), 12.f, hex_Dstcol, 1);
+																		padding += 15;
+																	}
+																}
+
+															}
+														}
+													}
+#if 0
+													if (GManagement.m_Configs.name_esp) {
+														auto state = Actor->PlayerState;
+														if (state) {
+															auto name = state->ApparentlyItsTheName;
+
+															auto wname = name.Get();
+
+															if (wname) {
+																std::wstring ws(wname);
+
+																std::string ws_playername(ws.begin(), ws.end());
+
+																imgui_custom::CreateOutlinedText(GManagement.Verdana, ws_playername.c_str(), ImVec2(ScreenPos.x, ScreenPos.y + padding), 12.f, hex_Dstcol, 1);
+																padding += 15;
+																	}
+
+																}
+															}
+#endif
 													if (GManagement.m_Configs.debug_esp) {
-														
+
 														// 1 is = 2
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("1: " + std::to_string(Root->N00000B18)).c_str());
 														padding += 15;
@@ -703,7 +776,7 @@ namespace Fortnite
 
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("15: " + std::to_string(Root->N00000AFE)).c_str());
 														padding += 15;
-										
+
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("16: " + std::to_string(Root->N00000AFF)).c_str());
 														padding += 15;
 
@@ -719,7 +792,7 @@ namespace Fortnite
 
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("20: " + std::to_string(Root->N00000B01)).c_str());
 														padding += 15;
-												
+
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("21: " + std::to_string(Root->N00000B39)).c_str());
 														padding += 15;
 
@@ -739,7 +812,7 @@ namespace Fortnite
 														padding += 15;
 
 														// velocity
-														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("27: " + std::to_string(Root->N00000B71)).c_str());
+														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("27: " + std::to_string(Root->Velocity)).c_str());
 														padding += 15;
 
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("28: " + std::to_string(Root->N00000B05)).c_str());
@@ -750,7 +823,7 @@ namespace Fortnite
 
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("30: " + std::to_string(Root->N00000B06)).c_str());
 														padding += 15;
-													
+
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("31: " + std::to_string(Root->N00000B77)).c_str());
 														padding += 15;
 
@@ -760,7 +833,7 @@ namespace Fortnite
 
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("33: " + std::to_string(Root->N00000B08)).c_str());
 														padding += 15;
-											
+
 														// X axis
 														ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y + padding), ("34: " + std::to_string(Root->N00000B0B)).c_str());
 														padding += 15;
@@ -775,6 +848,8 @@ namespace Fortnite
 														padding += 15;
 
 													}
+
+
 
 													if (GManagement.m_Configs.NameESP) {
 
@@ -803,23 +878,24 @@ namespace Fortnite
 
 														if (GManagement.m_Configs.BoundingBox)
 
-														imgui_custom::DrawRectangle(ImVec2(topleftX, topLeftY), ImVec2(botleftX, botleftY), hex_boxcol, 1.f);
+															imgui_custom::DrawRectangle(ImVec2(topleftX, topLeftY), ImVec2(botleftX, botleftY), hex_boxcol, 1.f);
 														// Black
 														imgui_custom::DrawRectangle(ImVec2(topleftX + 1, topLeftY - 1), ImVec2(botleftX - 1, botleftY + 1), 0x000000FF, 1.f);
 
 													}
 
-												}
+														}
 
-											}
+													}
 
 
 											if (GManagement.m_Configs.ActorID) {
 												ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y), std::to_string(Actor->ActorID).c_str());
 											}
+
+												}
+											}
 										}
-									}
-								}
 
 								Draw_Fov();
 
@@ -924,14 +1000,14 @@ namespace Fortnite
 
 									}
 								}
+									}
+								}
 							}
 						}
 					}
 				}
+
 			}
+
+
 		}
-
-	}
-
-
-}

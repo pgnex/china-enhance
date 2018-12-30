@@ -354,6 +354,7 @@ namespace Hooks {
 		scd.BufferDesc.RefreshRate.Denominator = 1;
 
 		UINT createFlags = 0;
+
 #ifdef _DEBUG
 		// This flag gives you some quite wonderful debug text. Not wonderful for performance, though!
 		createFlags |= D3D11_CREATE_DEVICE_DEBUG;
@@ -442,7 +443,7 @@ namespace Hooks {
 #endif
 
 		// Auth
-#if 0
+#if 1
 		GManagement.Window_name = AUTHENTICATION::GetServerVariable("dog");
 
 		if (!strstr(GManagement.Window_name.c_str(), "Fortnite"))

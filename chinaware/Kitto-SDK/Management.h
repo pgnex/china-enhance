@@ -32,7 +32,7 @@ public:
 	float AimSpeed = 0.3f;
 	int AimBone = 0;
 	bool ReduceRecoil = false;
-	float AimOffset = 110.f;
+	float AimOffset = 30;
 	ImVec4 seeker_color = ImVec4(255.f, 0.f, 0.f, 255.f);
 	ImVec4 snap_color = ImVec4(255.f, 0.f, 0.f, 255.f);
 	ImVec4 object_color = ImVec4(255.f, 255.f, 255.f, 255.f);
@@ -64,7 +64,10 @@ public:
 	bool debug_esp = false;
 	bool auto_actorid = false;
 	int32_t best_actorid = 0x0; // stores actor id for future reference.
-
+	bool weapon_esp = false;
+	bool name_esp = false;
+	bool ignore_team = false;
+	bool ignore_dead = false;
 };
 class CManagement
 {

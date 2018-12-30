@@ -144,7 +144,7 @@ namespace DrawScene
 		int key_counter = 0;
 		if (GManagement.m_bEnableMenu) {
 
-			if (ImGui::Begin(("Kitto SDK"), &GManagement.m_bEnableMenu, ImVec2(600, 325), 1.f, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar))
+			if (ImGui::Begin(("Kitto SDK"), &GManagement.m_bEnableMenu, ImVec2(600, 350), 1.f, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar))
 			{
 				static int selected_tab;
 
@@ -227,7 +227,7 @@ namespace DrawScene
 						ImGui::SliderFloat("##Aim Speed", &GManagement.m_Configs.AimSpeed, 0, 1.f, "%.1f");
 
 						ImGui::Text("Aim Offset");
-						ImGui::SliderFloat("##Aim Offset", &GManagement.m_Configs.AimOffset, 0, 150, "%.1f");
+						ImGui::SliderFloat("##Aim Offset", &GManagement.m_Configs.AimOffset, 0, 50, "%.1f");
 
 
 					}
@@ -239,7 +239,11 @@ namespace DrawScene
 					ImGui::BeginChild("COL2", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 					{
 						ImGui::Text("Visuals");
+
 						ImGui::Separator();
+						ImGui::Checkbox("Ignore Dead", &GManagement.m_Configs.ignore_dead, 0);
+
+						// ImGui::Checkbox("Ignore Team", &GManagement.m_Configs.ignore_team, 0);
 
 						ImGui::Checkbox("Snap lines", &GManagement.m_Configs.SnapLines, 0);
 						imgui_custom::custom_color_inline(GManagement.m_Configs.snap_color, "Snap Color");
@@ -251,6 +255,11 @@ namespace DrawScene
 
 						ImGui::Checkbox("Distance", &GManagement.m_Configs.DistanceESP, 0);
 						imgui_custom::custom_color_inline(GManagement.m_Configs.DistanceColor, "Distance Color");
+
+						ImGui::Checkbox("Weapon", &GManagement.m_Configs.weapon_esp, 0);
+
+						// ImGui::Checkbox("Name", &GManagement.m_Configs.name_esp, 0);
+
 
 						ImGui::Checkbox("Box Esp", &GManagement.m_Configs.BoundingBox, 0);
 						imgui_custom::custom_color_inline(GManagement.m_Configs.Box_Color, "Box Color");
@@ -448,16 +457,16 @@ namespace DrawScene
 #endif
 #pragma endregion
 
-					}
+			}
 				ImGui::End();
 #endif
-			}
+		}
 
 			if (GManagement.m_Configs.auto_actorid) {
 				GManagement.set_actor_once = true;
 			}
 
-		}
+	}
 
 
 
@@ -2024,7 +2033,7 @@ namespace DrawScene
 
 
 		}
-	}
+}
 
 
 

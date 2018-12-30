@@ -80,8 +80,9 @@ extern "C" __declspec(dllexport) int NextHook(int code, WPARAM wParam, LPARAM lP
 
 BOOL APIENTRY DllMain(HMODULE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
 
-	if (fdwReason == 1)	
+	if (fdwReason == 1) {
 		Hooks::CreateThreads();
+	}
 	
 	return TRUE;
 }
