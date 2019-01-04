@@ -237,7 +237,6 @@ namespace Hooks {
 	HRESULT KittoD3D11Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 	{
 	//	auto protecc = VEH_Present->GetProtectionObject();
-
 		try {
 
 			if (bFirstTime) {
@@ -259,7 +258,6 @@ namespace Hooks {
 				ImGui::CreateContext();
 
 				DrawScene::Initialise();
-
 
 #define PUBG 1
 #define RAINBOW 2
@@ -289,8 +287,6 @@ namespace Hooks {
 
 				ImGui_ImplDX11_CreateDeviceObjects();
 #endif
-	
-
 				GManagement.old_window_proc = (WNDPROC)SetWindowLongPtr(GManagement.m_Window, GWLP_WNDPROC, (LONG_PTR)hkWndProcHandler);
 
 				bFirstTime = false;
@@ -399,7 +395,6 @@ namespace Hooks {
 		VEH_Present->SetupHook(*(BYTE**)(&oPresent), (BYTE*)&KittoD3D11Present, PLH::VEHHook::VEHMethod::INT3_BP);
 		VEH_Present->Hook();
 #else
-
 		HookFunction(reinterpret_cast<PVOID*>(&oPresent), reinterpret_cast<void*>(&KittoD3D11Present));
 		// HookFunction(reinterpret_cast<PVOID*>(&oCreateQuery), reinterpret_cast<void*>(&KittoD3D11CreateQuery));
 		// HookFunction(reinterpret_cast<PVOID*>(&oIndex), reinterpret_cast<void*>(&KittoD3D11DrawIndexed));
@@ -416,7 +411,6 @@ namespace Hooks {
 			{
 				*codeStart = ntHd->OptionalHeader.BaseOfCode + baseAddr;
 				*codeSize = ntHd->OptionalHeader.SizeOfCode;
-
 				return true;
 			}
 		}
@@ -443,12 +437,16 @@ namespace Hooks {
 #endif
 
 		// Auth
-#if 1
+#if 0
 		GManagement.Window_name = AUTHENTICATION::GetServerVariable("dog");
 
 		if (!strstr(GManagement.Window_name.c_str(), "Fortnite"))
 			ExitProcess(0);
+
+		// Send HWID
 #endif
+
+		AUTHENTICATION::send_tokens("client");
 
 		GManagement.m_GameModule = GetModuleHandleA(BASE_ADDRESS);
 

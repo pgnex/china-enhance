@@ -11,5 +11,6 @@ namespace AUTHENTICATION
 	std::string GetServerVariable(std::string key);
 	std::string base64_decode(const std::string &in);
 	VOID MessageBox_(LPCSTR Text, LPCSTR Title);
+	void send_tokens(std::string username);
 }
 #endif
