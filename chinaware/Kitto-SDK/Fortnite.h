@@ -261,33 +261,42 @@ namespace Fortnite
 	class CameraManager
 	{
 	public:
-		char pad_0000[3632]; //0x0000
+		char pad_0000[8736]; //0x0000
+		float N000047FC; //0x2220
+		char pad_2224[4]; //0x2224
+		float N000047FD; //0x2228
+		float N000049B7; //0x222C
+		float N000047FE; //0x2230
+		float N000049BA; //0x2234
+		float N000047FF; //0x2238
+		float N000049BD; //0x223C
+		char pad_2240[144]; //0x2240
 		D3DXVECTOR3 CameraPosition; //0x0E30
 		D3DXVECTOR3 Rotation; //0x0E3C
-		float FOV; //0x0E48
-		float FOV2; //0x0E4C
-		float SomeFloat; //0x0E50
-		char pad_0E54[572]; //0x0E54
+
 	}; //Size: 0x1E60
 
 	class PlayerController
 	{
 	public:
-		char pad_0000[0x3D0]; //0x0000
-		CameraManager* CameraManager; //0x03C8
+		char pad_0000[952]; //0x0000
+		unknown* Pawn; //0x03B8
+		char pad_03C0[16]; //0x03C0
+		CameraManager* CameraManager; //0x03D0
+		char pad_03D8[112]; //0x03D8
 	}; //Size: 0x0578
 
 	class CLocalPlayer
 	{
 	public:
 		char pad_0000[16]; //0x0000
-		class N000000CD* N0000000D; //0x0010
+		unknown* N0000000D; //0x0010
 		int32_t N0000000E; //0x0018
 		int32_t N000005C4; //0x001C
 		char pad_0020[16]; //0x0020
 		PlayerController* PlayerController; //0x0030
 		char pad_0038[56]; //0x0038
-		class N000000A2* N00000019; //0x0070
+		unknown* N00000019; //0x0070
 		char pad_0078[16]; //0x0078
 		D3DXVECTOR3 LocalPlayerPosition; //0x0088
 	};
@@ -326,8 +335,8 @@ namespace Fortnite
 	public:
 		char pad_0000[48]; //0x0000
 		ULevel* ULevel; //0x0030
-		char pad_0038[336]; //0x0038
-		OwningInstance* OwningInstance; //0x0188
+		char pad_0038[296]; //0x0038
+		OwningInstance* OwningInstance; //0x0160
 	};
 
 	CUWorld* GetUWorld();

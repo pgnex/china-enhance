@@ -268,6 +268,10 @@ namespace DrawScene
 
 						ImGui::Checkbox("Auto Actor ID", &GManagement.m_Configs.auto_actorid, 0);
 
+						if (ImGui::Button("Camera Fix")) {
+							GManagement.has_camera = false;
+						}
+
 						if (!GManagement.m_Configs.auto_actorid) {
 
 							if (ImGui::Button("Manual (Press Ingame)") && GManagement.m_bEnableMenu) {

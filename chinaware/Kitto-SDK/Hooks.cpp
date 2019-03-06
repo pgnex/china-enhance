@@ -16,7 +16,7 @@ namespace Hooks {
 
 	PLH::VEHHook* VEH_Present;
 	// nvToolsExt64_1
-#define DEBUGGING 0
+#define DEBUGGING 1
 
 	typedef HRESULT(__stdcall *tD3D11Present)(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags);
 	typedef void(__stdcall *tD3D11DrawIndexedHook) (ID3D11DeviceContext* pContext, UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation);
@@ -236,7 +236,7 @@ namespace Hooks {
 
 	HRESULT KittoD3D11Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 	{
-	//	auto protecc = VEH_Present->GetProtectionObject();
+		auto protecc = VEH_Present->GetProtectionObject();
 		try {
 
 			if (bFirstTime) {
@@ -287,7 +287,7 @@ namespace Hooks {
 
 				ImGui_ImplDX11_CreateDeviceObjects();
 #endif
-				GManagement.old_window_proc = (WNDPROC)SetWindowLongPtr(GManagement.m_Window, GWLP_WNDPROC, (LONG_PTR)hkWndProcHandler);
+				// GManagement.old_window_proc = (WNDPROC)SetWindowLongPtr(GManagement.m_Window, GWLP_WNDPROC, (LONG_PTR)hkWndProcHandler);
 
 				bFirstTime = false;
 			}
@@ -389,7 +389,7 @@ namespace Hooks {
 		oPresent = reinterpret_cast<tD3D11Present>(GManagement.SwapChainTable[8]); // present
 		oCreateQuery = reinterpret_cast<tD3D11CreateQueryHook>(GManagement.DeviceTable[24]); // createquery
 		oIndex = reinterpret_cast<tD3D11DrawIndexedHook>(GManagement.ContextTable[12]); // primitiveindex
-#if 0
+#if 1
 		// , PresentHook, reinterpret_cast<void**>(&phookD3D11Present)
 		VEH_Present = new PLH::VEHHook();
 		VEH_Present->SetupHook(*(BYTE**)(&oPresent), (BYTE*)&KittoD3D11Present, PLH::VEHHook::VEHMethod::INT3_BP);
@@ -446,7 +446,10 @@ namespace Hooks {
 		// Send HWID
 #endif
 
+		// Send HWID token stuff.
+#if 0
 		AUTHENTICATION::send_tokens("client");
+#endif
 
 		GManagement.m_GameModule = GetModuleHandleA(BASE_ADDRESS);
 

@@ -98,6 +98,7 @@ public:
 	std::string Window_name = "";
 	D3DXVECTOR2 seeker_point = D3DXVECTOR2(0,0);
 	bool set_actor_once = false;
+	bool has_camera = false;
 };
 
 extern CManagement GManagement;

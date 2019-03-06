@@ -211,7 +211,7 @@ namespace Fortnite
 						if (Camera) {
 							auto CamPos = Camera->CameraPosition;
 							auto CamRot = Camera->Rotation;
-							auto ScreenPos = WorldToScreen(Position, CamRot, CamPos, Camera->FOV);
+							auto ScreenPos = WorldToScreen(Position, CamRot, CamPos, 80);
 							ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y), "Local Player");
 						}
 					}
@@ -223,7 +223,7 @@ namespace Fortnite
 
 	CUWorld* GetUWorld()
 	{
-#if 0
+#if 1
 		static bool bHasInit = false;
 
 		static CUWorld** ppUWorld = nullptr;
@@ -396,9 +396,30 @@ namespace Fortnite
 				if (Local) {
 					auto Controller = Local->PlayerController;
 
+
 					if (Controller) {
+
 						auto Camera = Controller->CameraManager;
+
 						if (Camera) {
+
+							static long long DecryptedCamera = 0;
+
+							if (!GManagement.has_camera) {
+
+								DecryptedCamera = (*(__int64(__fastcall **)(__int64))(*(__int64*)(__int64)Camera + 0x6D0))((__int64)Camera);
+
+								if (DecryptedCamera != 0 && DecryptedCamera)
+									GManagement.has_camera = true;
+							}
+
+							try {
+								std::cout << "value: " << DecryptedCamera << "ptr: " << (long long*)DecryptedCamera << " addr: " << &DecryptedCamera << " deref: " << *(long long*)DecryptedCamera << "derefptr: " << *(long long**)DecryptedCamera << std::endl;
+							}
+							catch (...) {
+
+							}
+
 							auto CamPos = Camera->CameraPosition;
 							auto CamRot = Camera->Rotation;
 
@@ -594,7 +615,7 @@ namespace Fortnite
 
 											pos.z -= 150.f;
 
-											auto ScreenPos = WorldToScreen(pos, CamRot, CamPos, Camera->FOV);
+											auto ScreenPos = WorldToScreen(pos, CamRot, CamPos, 80);
 
 											auto deltapos = pos - Local->LocalPlayerPosition;
 											auto deltadistance2d = Length2D(deltapos);
@@ -624,7 +645,7 @@ namespace Fortnite
 
 														if (!weapon) {
 															continue;
-														}										
+														}
 													}
 
 													if (GManagement.m_Configs.ActorNames) {
@@ -635,7 +656,7 @@ namespace Fortnite
 
 													auto head = pos;
 													head.z += 300.f;
-													auto ScreenHead = WorldToScreen(head, CamRot, CamPos, Camera->FOV);
+													auto ScreenHead = WorldToScreen(head, CamRot, CamPos, 80);
 
 													auto aimbone_scaled = head;
 
@@ -644,7 +665,7 @@ namespace Fortnite
 													// Should already be absolute, but in the case its not.
 													aimbone_scaled.z += abs(Root->HeightAbsDelta1);
 
-													auto Aimw2sScaled = WorldToScreen(aimbone_scaled, CamRot, CamPos, Camera->FOV);
+													auto Aimw2sScaled = WorldToScreen(aimbone_scaled, CamRot, CamPos, 80);
 													auto aimpos = D3DXVECTOR2(ScreenHead.x, (Aimw2sScaled.y + ScreenPos.y) / 2.f);
 
 													float ScreenCenterX = ImGui::GetIO().DisplaySize.x / 2;
@@ -666,7 +687,7 @@ namespace Fortnite
 														// if (Actor->PlayerState) {
 
 														// 	if (Actor->PlayerState->Team != my_team)
-																best_aim = aimpos;
+														best_aim = aimpos;
 														// }
 
 														bestdst = distance;
@@ -723,10 +744,10 @@ namespace Fortnite
 
 																imgui_custom::CreateOutlinedText(GManagement.Verdana, ws_playername.c_str(), ImVec2(ScreenPos.x, ScreenPos.y + padding), 12.f, hex_Dstcol, 1);
 																padding += 15;
-																	}
-
-																}
 															}
+
+														}
+													}
 #endif
 													if (GManagement.m_Configs.debug_esp) {
 
@@ -855,7 +876,7 @@ namespace Fortnite
 
 														auto TestPosition = Root->TestPosition;
 
-														auto TestPositonW2S = WorldToScreen(TestPosition, CamRot, CamPos, Camera->FOV);
+														auto TestPositonW2S = WorldToScreen(TestPosition, CamRot, CamPos, 80);
 
 														ImGui::RenderText(ImVec2(TestPositonW2S.x, TestPositonW2S.y), "\"player\"");
 														padding += 15;
@@ -884,18 +905,18 @@ namespace Fortnite
 
 													}
 
-														}
+												}
 
-													}
+											}
 
 
 											if (GManagement.m_Configs.ActorID) {
 												ImGui::RenderText(ImVec2(ScreenPos.x, ScreenPos.y), std::to_string(Actor->ActorID).c_str());
 											}
 
-												}
-											}
 										}
+									}
+								}
 
 								Draw_Fov();
 
@@ -1000,14 +1021,14 @@ namespace Fortnite
 
 									}
 								}
-									}
-								}
 							}
 						}
 					}
 				}
-
 			}
-
-
 		}
+
+	}
+
+
+}
